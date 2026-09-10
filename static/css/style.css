@@ -2143,4 +2143,606 @@ section {
     }
     .cursor-glow { display: none !important; }
     * { cursor: auto !important; }
+    .char-pikachu, .char-heartkitty, .char-starbuddy,
+    .char-flowerfairy, .char-peekcat { animation: none !important; }
+}
+
+/* =====================================================================
+   ANIMATED CHARACTERS – Pikachu, Heart Kitty, Star Buddy,
+   Flower Fairy, Peek Cat
+   ===================================================================== */
+
+/* --- Shared character base --- */
+.char-pikachu, .char-heartkitty, .char-starbuddy, .char-flowerfairy, .char-peekcat {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+/* =====================================================================
+   1. PIKACHU – bounces in hero, waves tail, blinks, speech bubble
+   ===================================================================== */
+.char-pikachu {
+    right: 8%;
+    bottom: 18%;
+    animation: pika-bounce 2.8s ease-in-out infinite;
+}
+@keyframes pika-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+.pika-body {
+    position: relative;
+    width: 64px;
+    height: 60px;
+}
+.pika-face {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 46px;
+    background: #ffe066;
+    border-radius: 50% 50% 48% 48%;
+    box-shadow: inset 0 -4px 8px rgba(0,0,0,0.06);
+    overflow: visible;
+}
+.pika-ear {
+    position: absolute;
+    width: 14px;
+    height: 30px;
+    background: #ffe066;
+    border-radius: 50% 50% 20% 20%;
+    top: -18px;
+    z-index: 1;
+}
+.pika-ear::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 14px;
+    background: #f5c842;
+    border-radius: 50%;
+}
+.pika-ear-l { left: 4px; transform: rotate(-15deg); }
+.pika-ear-r { right: 4px; transform: rotate(15deg); }
+.pika-eye {
+    position: absolute;
+    width: 7px;
+    height: 8px;
+    background: #2a1a00;
+    border-radius: 50%;
+    top: 14px;
+    animation: pika-blink 4s ease-in-out infinite;
+}
+.pika-eye::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+}
+.pika-eye-l { left: 12px; }
+.pika-eye-r { right: 12px; }
+@keyframes pika-blink {
+    0%, 42%, 46%, 100% { transform: scaleY(1); }
+    44% { transform: scaleY(0.1); }
+}
+.pika-cheek {
+    position: absolute;
+    width: 12px;
+    height: 9px;
+    background: #ff8a8a;
+    border-radius: 50%;
+    opacity: 0.7;
+    top: 24px;
+    animation: pika-cheek-pulse 3s ease-in-out infinite;
+}
+.pika-cheek-l { left: 1px; }
+.pika-cheek-r { right: 1px; }
+@keyframes pika-cheek-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.15); }
+}
+.pika-mouth {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 5px;
+    border-bottom: 2.5px solid #a06000;
+    border-radius: 0 0 50% 50%;
+}
+.pika-tail {
+    position: absolute;
+    right: -10px;
+    bottom: 8px;
+    width: 20px;
+    height: 22px;
+    background: #ffe066;
+    clip-path: polygon(0% 60%, 60% 20%, 100% 50%, 60% 80%, 30% 100%);
+    transform-origin: left center;
+    animation: pika-tail-wag 1.5s ease-in-out infinite;
+}
+@keyframes pika-tail-wag {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(18deg); }
+}
+.pika-speech {
+    position: absolute;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: var(--pink-dark);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    border-radius: 14px;
+    border: 1.5px solid var(--pink);
+    white-space: nowrap;
+    opacity: 0;
+    animation: pika-speech-pop 5s ease-in-out infinite;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(224, 129, 167, 0.15);
+}
+.pika-speech::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 1.5px solid var(--pink);
+    border-top: none;
+    border-right: none;
+    border-radius: 0 0 0 4px;
+}
+@keyframes pika-speech-pop {
+    0%, 70%, 100% { opacity: 0; transform: translateX(-50%) translateY(6px); }
+    75%, 95% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* =====================================================================
+   2. HEART KITTY – heart-shaped body with cat face, crying near sorry
+   ===================================================================== */
+.char-heartkitty {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 30px auto 0;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: hk-float 3.5s ease-in-out infinite;
+}
+@keyframes hk-float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+.hk-body {
+    position: relative;
+    width: 70px;
+    height: 64px;
+}
+.hk-face {
+    position: absolute;
+    inset: 0;
+    background: #ff7eb3;
+    border-radius: 50% 50% 0 0;
+    transform: rotate(0deg);
+    overflow: visible;
+}
+.hk-face::before, .hk-face::after {
+    content: '';
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    background: #ff7eb3;
+    border-radius: 50%;
+    top: 2px;
+}
+.hk-face::before { left: -10px; }
+.hk-face::after { right: -10px; }
+.hk-ear {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #ff7eb3;
+    top: -10px;
+    z-index: 2;
+}
+.hk-ear-l { left: 6px; transform: rotate(-10deg); }
+.hk-ear-r { right: 6px; transform: rotate(10deg); }
+.hk-eye {
+    position: absolute;
+    width: 6px;
+    height: 7px;
+    background: #2a0a1a;
+    border-radius: 50%;
+    top: 22px;
+    z-index: 3;
+    animation: hk-blink 3.5s ease-in-out infinite;
+}
+.hk-eye::after {
+    content: '';
+    position: absolute;
+    width: 2.5px;
+    height: 2.5px;
+    background: #fff;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+}
+.hk-eye-l { left: 18px; }
+.hk-eye-r { right: 18px; }
+@keyframes hk-blink {
+    0%, 38%, 42%, 100% { transform: scaleY(1); }
+    40% { transform: scaleY(0.1); }
+}
+.hk-nose {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6px;
+    color: #c44a7a;
+    z-index: 3;
+}
+.hk-mouth {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 5px;
+    border-bottom: 2px solid #c44a7a;
+    border-radius: 0 0 50% 50%;
+    z-index: 3;
+}
+.hk-whisker {
+    position: absolute;
+    width: 16px;
+    height: 1px;
+    background: #c44a7a;
+    top: 30px;
+    z-index: 3;
+}
+.hk-wl1 { left: -2px; transform: rotate(-5deg); }
+.hk-wl2 { left: -2px; top: 33px; transform: rotate(5deg); }
+.hk-wr1 { right: -2px; transform: rotate(5deg); }
+.hk-wr2 { right: -2px; top: 33px; transform: rotate(-5deg); }
+.hk-tear {
+    width: 6px;
+    height: 10px;
+    background: linear-gradient(to bottom, rgba(120, 180, 255, 0.8), rgba(120, 180, 255, 0));
+    border-radius: 0 0 50% 50%;
+    margin-top: -2px;
+    margin-left: -16px;
+    animation: hk-cry 2.5s ease-in-out infinite;
+}
+@keyframes hk-cry {
+    0%, 60%, 100% { opacity: 0; transform: translateY(0); }
+    65% { opacity: 1; }
+    90% { opacity: 0; transform: translateY(14px); }
+}
+
+/* =====================================================================
+   3. STAR BUDDY – cute star with face, twinkles near waiting counter
+   ===================================================================== */
+.char-starbuddy {
+    left: auto;
+    right: 10%;
+    bottom: 12%;
+    width: 60px;
+    height: 60px;
+    animation: star-spin 8s linear infinite;
+}
+@keyframes star-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.star-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffe066, #ffb347);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    position: relative;
+    animation: star-counter-spin 8s linear infinite;
+}
+@keyframes star-counter-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+.star-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.star-eye {
+    position: absolute;
+    width: 5px;
+    height: 6px;
+    background: #4a2a00;
+    border-radius: 50%;
+    top: 42%;
+    animation: star-blink 3s ease-in-out infinite;
+}
+.star-eye::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+}
+.star-eye-l { left: 36%; }
+.star-eye-r { right: 36%; }
+@keyframes star-blink {
+    0%, 42%, 46%, 100% { transform: scaleY(1); }
+    44% { transform: scaleY(0.1); }
+}
+.star-smile {
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    border-bottom: 2px solid #6b3a00;
+    border-radius: 0 0 50% 50%;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.star-blush {
+    position: absolute;
+    width: 7px;
+    height: 5px;
+    background: #ff8a8a;
+    border-radius: 50%;
+    opacity: 0.5;
+    top: 52%;
+}
+.star-blush-l { left: 24%; }
+.star-blush-r { right: 24%; }
+.star-sparkle {
+    position: absolute;
+    font-size: 10px;
+    color: #ffe066;
+    animation: star-twinkle 2s ease-in-out infinite;
+}
+.star-sp1 { top: -8px; right: -4px; animation-delay: 0s; }
+.star-sp2 { bottom: -6px; left: -6px; animation-delay: 0.7s; }
+.star-sp3 { top: 4px; left: -10px; animation-delay: 1.3s; }
+@keyframes star-twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* =====================================================================
+   4. FLOWER FAIRY – flower with petals, face, stem, near gift box
+   ===================================================================== */
+.char-flowerfairy {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 30px auto 0;
+    width: 70px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: ff-sway 4s ease-in-out infinite;
+}
+@keyframes ff-sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+.ff-petals {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+.ff-petal {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #ffb3d9;
+    border-radius: 50% 50% 50% 0;
+    top: 50%;
+    left: 50%;
+    transform-origin: center bottom;
+}
+.ff-petal::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+}
+.ff-p1 { transform: translate(-50%, -100%) rotate(0deg); }
+.ff-p2 { transform: translate(-50%, -100%) rotate(72deg); }
+.ff-p3 { transform: translate(-50%, -100%) rotate(144deg); }
+.ff-p4 { transform: translate(-50%, -100%) rotate(216deg); }
+.ff-p5 { transform: translate(-50%, -100%) rotate(288deg); }
+.ff-center {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #ffe066;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.ff-eye {
+    position: absolute;
+    width: 3px;
+    height: 4px;
+    background: #4a2a00;
+    border-radius: 50%;
+    top: 7px;
+    animation: ff-blink 4s ease-in-out infinite;
+}
+.ff-eye-l { left: 5px; }
+.ff-eye-r { right: 5px; }
+@keyframes ff-blink {
+    0%, 44%, 48%, 100% { transform: scaleY(1); }
+    46% { transform: scaleY(0.1); }
+}
+.ff-smile {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 3px;
+    border-bottom: 1.5px solid #6b3a00;
+    border-radius: 0 0 50% 50%;
+}
+.ff-stem {
+    width: 3px;
+    height: 30px;
+    background: #6abf69;
+    border-radius: 2px;
+    margin-top: -2px;
+}
+.ff-leaf {
+    position: absolute;
+    width: 14px;
+    height: 8px;
+    background: #6abf69;
+    border-radius: 50% 0;
+    bottom: 22px;
+}
+.ff-leaf-l { left: 16px; transform: rotate(-30deg); }
+.ff-leaf-r { right: 16px; transform: rotate(30deg) scaleX(-1); }
+
+/* =====================================================================
+   5. PEEK CAT – peeks from bottom-right corner, eyes follow cursor
+   ===================================================================== */
+.char-peekcat {
+    position: fixed;
+    bottom: -28px;
+    right: 30px;
+    z-index: 250;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: bottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.char-peekcat:hover {
+    bottom: 0;
+}
+.pc-head {
+    position: relative;
+    width: 60px;
+    height: 44px;
+    background: #ffb3a7;
+    border-radius: 50% 50% 0 0;
+    box-shadow: inset 0 -3px 6px rgba(0,0,0,0.06);
+    overflow: visible;
+}
+.pc-ear {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 18px solid #ffb3a7;
+    top: -14px;
+    z-index: 1;
+}
+.pc-ear::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid #ff8a7a;
+}
+.pc-ear-l { left: 4px; transform: rotate(-10deg); }
+.pc-ear-r { right: 4px; transform: rotate(10deg); }
+.pc-eye {
+    position: absolute;
+    width: 12px;
+    height: 13px;
+    background: #c8e6c9;
+    border-radius: 50%;
+    top: 14px;
+    border: 1.5px solid #5a8a5a;
+    overflow: hidden;
+}
+.pc-eye-l { left: 10px; }
+.pc-eye-r { right: 10px; }
+.pc-pupil {
+    position: absolute;
+    width: 6px;
+    height: 7px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.15s ease-out;
+}
+.pc-nose {
+    position: absolute;
+    top: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px;
+    color: #c44a7a;
+}
+.pc-mouth {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 5px;
+    border-bottom: 2px solid #c44a7a;
+    border-radius: 0 0 50% 50%;
+}
+.pc-paw {
+    position: absolute;
+    width: 18px;
+    height: 10px;
+    background: #ffb3a7;
+    border-radius: 0 0 50% 50%;
+    bottom: -6px;
+}
+.pc-paw-l { left: 8px; }
+.pc-paw-r { right: 8px; }
+
+/* =====================================================================
+   RESPONSIVE for characters
+   ===================================================================== */
+@media (max-width: 768px) {
+    .char-pikachu { right: 4%; bottom: 12%; transform: scale(0.75); }
+    .char-starbuddy { right: 4%; bottom: 8%; transform: scale(0.7); }
+    .char-peekcat { right: 16px; }
+}
+@media (max-width: 480px) {
+    .char-pikachu { right: 2%; bottom: 8%; transform: scale(0.6); }
+    .char-starbuddy { display: none; }
 }

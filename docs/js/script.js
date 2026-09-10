@@ -758,6 +758,7 @@ function initPeakEdition() {
     initParallaxMouse();
     initScrollHueShift();
     upgradeStarsToParticles();
+    initCharacters();
 }
 
 /* --- Custom cursor glow orb --- */
@@ -972,4 +973,112 @@ function upgradeStarsToParticles() {
             }
         });
     }, { passive: true });
+}
+
+/* =====================================================================
+   CHARACTERS – Pikachu speech, peek cat eyes, heart kitty pet
+   ===================================================================== */
+function initCharacters() {
+    initPikachuSpeech();
+    initPeekCatEyes();
+    initPeekCatPet();
+    initHeartKittyPet();
+}
+
+/* --- Pikachu rotates speech bubble messages --- */
+function initPikachuSpeech() {
+    const el = document.getElementById('pikaSpeech');
+    if (!el) return;
+    const msgs = [
+        'I miss you!',
+        'Come back!',
+        "You're my sunshine!",
+        'Bhonduuu!',
+        'I love you!',
+        "Don't leave!",
+        '*nuzzles*',
+        'Hug me!',
+        "You're everything!",
+        '*blushes*'
+    ];
+    let idx = 0;
+    setInterval(() => {
+        idx = (idx + 1) % msgs.length;
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.textContent = msgs[idx];
+        el.style.animation = 'pika-speech-pop 5s ease-in-out infinite';
+    }, 5000);
+}
+
+/* --- Peek Cat eyes follow cursor --- */
+function initPeekCatEyes() {
+    if (matchMedia('(pointer: coarse)').matches) return;
+    const cat = document.getElementById('peekCat');
+    if (!cat) return;
+    const pupils = cat.querySelectorAll('.pc-pupil');
+
+    document.addEventListener('mousemove', e => {
+        pupils.forEach(pupil => {
+            const eye = pupil.parentElement;
+            const rect = eye.getBoundingClientRect();
+            const eyeCx = rect.left + rect.width / 2;
+            const eyeCy = rect.top + rect.height / 2;
+            const dx = e.clientX - eyeCx;
+            const dy = e.clientY - eyeCy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const maxMove = 2.5;
+            const mx = (dx / Math.max(dist, 1)) * maxMove;
+            const my = (dy / Math.max(dist, 1)) * maxMove;
+            pupil.style.transform = 'translate(' + mx + 'px, ' + my + 'px)';
+        });
+    });
+
+    setInterval(() => {
+        cat.style.bottom = '0';
+        setTimeout(() => { cat.style.bottom = '-28px'; }, 3000);
+    }, 18000);
+}
+
+/* --- Peek Cat: click to show random cat message --- */
+function initPeekCatPet() {
+    const cat = document.getElementById('peekCat');
+    if (!cat) return;
+    const msgs = ['Meow~', 'Pet me!', '*purrs*', 'Bhonduuu!', '*nuzzles*', 'I love you!'];
+    cat.addEventListener('click', () => {
+        cat.style.bottom = '0';
+        const bubble = document.createElement('div');
+        bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        bubble.style.cssText = 'position:absolute;top:-32px;left:50%;transform:translateX(-50%);background:#fff;color:#c44a7a;font-family:Quicksand,sans-serif;font-weight:700;font-size:0.65rem;padding:4px 10px;border-radius:10px;border:1.5px solid #ff8a7a;white-space:nowrap;opacity:0;transition:opacity 0.3s;pointer-events:none;box-shadow:0 3px 10px rgba(224,129,167,0.15);';
+        cat.appendChild(bubble);
+        requestAnimationFrame(() => { bubble.style.opacity = '1'; });
+        setTimeout(() => {
+            bubble.style.opacity = '0';
+            setTimeout(() => bubble.remove(), 300);
+        }, 2000);
+    });
+}
+
+/* --- Heart Kitty: click to make it meow + spawn mini hearts --- */
+function initHeartKittyPet() {
+    const hk = document.querySelector('.char-heartkitty');
+    if (!hk) return;
+    hk.style.pointerEvents = 'auto';
+    hk.addEventListener('click', () => {
+        hk.style.animation = 'none';
+        hk.offsetHeight;
+        hk.style.animation = 'hk-float 3.5s ease-in-out infinite';
+        var hearts = ['\u{1F496}', '\u{1F497}', '\u{1F495}', '\u2764\uFE0F', '\u{1F431}', '\u{1F496}'];
+        for (var i = 0; i < 6; i++) {
+            (function(idx) {
+                setTimeout(() => {
+                    const heart = document.createElement('span');
+                    heart.textContent = hearts[idx];
+                    heart.style.cssText = 'position:absolute;font-size:' + (14 + Math.random() * 10) + 'px;left:' + (30 + Math.random() * 40) + '%;top:0;pointer-events:none;animation:clickHeartFloat 1.2s ease-out forwards;z-index:999;';
+                    hk.appendChild(heart);
+                    setTimeout(() => heart.remove(), 1200);
+                }, idx * 100);
+            })(i);
+        }
+    });
 }

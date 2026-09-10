@@ -12,8 +12,8 @@
     <meta property="og:image" content="https://36gt.github.io/for-bhonduuu/photos/bhondu.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e8a0bf' d='M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.7-8 11-8 11z'/%3E%3C/svg%3E">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=10">
 </head>
 <body>
     <div class="preloader" id="preloader">
@@ -99,19 +99,34 @@
 
     <button class="music-toggle" id="musicToggle" title="Toggle Music">♪</button>
     <audio id="bgMusic" loop>
-        <source src="music/sad-romance.mp3" type="audio/mpeg">
+        <source src="{{ url_for('static', filename='music/sad-romance.mp3') }}" type="audio/mpeg">
     </audio>
 
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="typewriter" id="heroTitle"></h1>
-            <p class="fade-in delay-1 hero-sub" id="heroSub"></p>
+            <p class="fade-in delay-3 hero-sub" id="heroSub"></p>
             <a href="#memories" class="cta-btn fade-in delay-3">Scroll Down</a>
         </div>
         <div class="scroll-indicator">
             <div class="mouse">
                 <div class="wheel"></div>
             </div>
+        </div>
+        <div class="char-pikachu" id="charPikachu">
+            <div class="pika-body">
+                <div class="pika-ear pika-ear-l"></div>
+                <div class="pika-ear pika-ear-r"></div>
+                <div class="pika-face">
+                    <div class="pika-eye pika-eye-l"></div>
+                    <div class="pika-eye pika-eye-r"></div>
+                    <div class="pika-cheek pika-cheek-l"></div>
+                    <div class="pika-cheek pika-cheek-r"></div>
+                    <div class="pika-mouth"></div>
+                </div>
+                <div class="pika-tail"></div>
+            </div>
+            <div class="pika-speech" id="pikaSpeech">I miss you!</div>
         </div>
     </section>
 
@@ -121,15 +136,15 @@
         <div class="slideshow-container">
             <div class="slideshow" id="slideshow">
                 <div class="slide active">
-                    <img src="photos/bhondu.jpg" alt="Memory 1">
+                    <img src="{{ url_for('static', filename='photos/bhondu.jpg') }}" alt="Memory 1">
                     <div class="slide-caption">Memory 1 - edit this text!</div>
                 </div>
                 <div class="slide">
-                    <img src="photos/image.png" alt="Memory 2">
+                    <img src="{{ url_for('static', filename='photos/image.png') }}" alt="Memory 2">
                     <div class="slide-caption">Memory 2 - edit this text!</div>
                 </div>
                 <div class="slide">
-                    <img src="photos/photo1.png" alt="Memory 3">
+                    <img src="{{ url_for('static', filename='photos/photo1.png') }}" alt="Memory 3">
                     <div class="slide-caption">Memory 3 - edit this text!</div>
                 </div>
             </div>
@@ -230,6 +245,23 @@
                 <p class="signature">Forever yours,<br>Your foolish boy</p>
             </div>
         </div>
+        <div class="char-heartkitty">
+            <div class="hk-body">
+                <div class="hk-ear hk-ear-l"></div>
+                <div class="hk-ear hk-ear-r"></div>
+                <div class="hk-face">
+                    <div class="hk-eye hk-eye-l"></div>
+                    <div class="hk-eye hk-eye-r"></div>
+                    <div class="hk-nose">▾</div>
+                    <div class="hk-mouth"></div>
+                    <div class="hk-whisker hk-wl1"></div>
+                    <div class="hk-whisker hk-wl2"></div>
+                    <div class="hk-whisker hk-wr1"></div>
+                    <div class="hk-whisker hk-wr2"></div>
+                </div>
+            </div>
+            <div class="hk-tear"></div>
+        </div>
     </section>
 
     <section id="letter" class="letter-section">
@@ -276,6 +308,20 @@
             </div>
         </div>
         <p class="waiting-caption">...since the day I lost you</p>
+        <div class="char-starbuddy">
+            <div class="star-body">
+                <div class="star-face">
+                    <div class="star-eye star-eye-l"></div>
+                    <div class="star-eye star-eye-r"></div>
+                    <div class="star-smile"></div>
+                    <div class="star-blush star-blush-l"></div>
+                    <div class="star-blush star-blush-r"></div>
+                </div>
+            </div>
+            <div class="star-sparkle star-sp1">✦</div>
+            <div class="star-sparkle star-sp2">✧</div>
+            <div class="star-sparkle star-sp3">✦</div>
+        </div>
     </section>
 
     <section id="oursong" class="song-section">
@@ -303,20 +349,37 @@
                 <div class="video-grid">
                     <div class="video-card">
                         <video controls preload="metadata">
-                            <source src="videos/video1.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/video1.mp4') }}" type="video/mp4">
                             Your browser does not support video.
                         </video>
                         <p class="video-label">Our moment 1</p>
                     </div>
                     <div class="video-card">
                         <video controls preload="metadata">
-                            <source src="videos/video2.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/video2.mp4') }}" type="video/mp4">
                             Your browser does not support video.
                         </video>
                         <p class="video-label">Our moment 2</p>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="char-flowerfairy">
+            <div class="ff-petals">
+                <div class="ff-petal ff-p1"></div>
+                <div class="ff-petal ff-p2"></div>
+                <div class="ff-petal ff-p3"></div>
+                <div class="ff-petal ff-p4"></div>
+                <div class="ff-petal ff-p5"></div>
+            </div>
+            <div class="ff-center">
+                <div class="ff-eye ff-eye-l"></div>
+                <div class="ff-eye ff-eye-r"></div>
+                <div class="ff-smile"></div>
+            </div>
+            <div class="ff-stem"></div>
+            <div class="ff-leaf ff-leaf-l"></div>
+            <div class="ff-leaf ff-leaf-r"></div>
         </div>
     </section>
 
@@ -363,9 +426,25 @@
         <p class="footer-main">Made with a broken heart, for the one who broke it</p>
         <p class="footer-sub">rebuilt again and again, still <span class="footer-name">for Bhonduuu</span></p>
     </footer>
+    <div class="char-peekcat" id="peekCat">
+        <div class="pc-ear pc-ear-l"></div>
+        <div class="pc-ear pc-ear-r"></div>
+        <div class="pc-head">
+            <div class="pc-eye pc-eye-l">
+                <div class="pc-pupil"></div>
+            </div>
+            <div class="pc-eye pc-eye-r">
+                <div class="pc-pupil"></div>
+            </div>
+            <div class="pc-nose">▾</div>
+            <div class="pc-mouth"></div>
+        </div>
+        <div class="pc-paw pc-paw-l"></div>
+        <div class="pc-paw pc-paw-r"></div>
+    </div>
 
     <button class="back-to-top" id="backToTop" title="Back to top">↑</button>
 
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=6"></script>
 </body>
 </html>
