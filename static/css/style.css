@@ -5,16 +5,16 @@
 }
 
 :root {
-    --bg-dark: #0a0a0f;
-    --bg-section: #0d0d14;
-    --pink: #e8a0bf;
-    --pink-light: #f5c6d6;
-    --pink-dark: #b76e9a;
-    --purple: #7b5ea7;
+    --bg-dark: #fbf4ee;
+    --bg-section: #fff7f2;
+    --pink: #f08fb5;
+    --pink-light: #d04e84;
+    --pink-dark: #e56f9e;
+    --purple: #b582a8;
     --purple-light: #a78bfa;
-    --text: #d4c5e2;
-    --text-dim: #8a7a9a;
-    --accent: #ff6b9d;
+    --text: #7a5a6b;
+    --text-dim: #a98a99;
+    --accent: #ff5f9d;
 }
 
 /* Self-hosted fonts (load locally, work on any phone/region) */
@@ -58,9 +58,16 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--bg-dark);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 182, 193, 0.30), transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(228, 210, 255, 0.28), transparent 40%),
+        radial-gradient(circle at 80% 85%, rgba(255, 218, 185, 0.30), transparent 45%),
+        radial-gradient(circle at 15% 88%, rgba(255, 205, 222, 0.28), transparent 40%),
+        linear-gradient(160deg, #fff6f0, #fdeef5 40%, #f4eefc 70%, #fff9f1);
     color: var(--text);
     overflow-x: hidden;
+    min-height: 100vh;
+    background-attachment: fixed;
 }
 
 /* Stars canvas */
@@ -85,14 +92,19 @@ body {
 
 .rain-drop {
     position: absolute;
-    width: 1px;
-    background: linear-gradient(transparent, rgba(200, 180, 220, 0.3));
-    animation: rain-fall linear infinite;
+    border-radius: 80% 0 80% 0;
+    background: linear-gradient(135deg, #f9c9d8, #f496ab);
+    opacity: 0.45;
+    animation: rain-fall linear infinite, petal-sway 3.2s ease-in-out infinite alternate;
 }
 
 @keyframes rain-fall {
-    0% { transform: translateY(-100vh); }
-    100% { transform: translateY(100vh); }
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(105vh); }
+}
+@keyframes petal-sway {
+    from { translate: -18px 0; rotate: -25deg; }
+    to   { translate:  18px 0; rotate:  30deg; }
 }
 
 /* Floating hearts */
@@ -128,8 +140,9 @@ body {
     gap: 30px;
     padding: 20px;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), transparent);
+    background: linear-gradient(to bottom, rgba(255, 250, 246, 0.92), rgba(255, 250, 246, 0));
     backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
 }
 
 /* Side menu button */
@@ -140,8 +153,8 @@ body {
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    border: 1px solid rgba(232, 160, 191, 0.3);
-    background: rgba(20, 15, 30, 0.6);
+    border: 1px solid rgba(240, 143, 181, 0.4);
+    background: rgba(255, 252, 249, 0.75);
     backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
@@ -183,7 +196,7 @@ body {
 .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(10, 5, 15, 0.6);
+    background: rgba(120, 60, 90, 0.4);
     backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
@@ -203,11 +216,11 @@ body {
     left: 0;
     width: 300px;
     height: 100vh;
-    background: linear-gradient(160deg, rgba(30, 18, 45, 0.85), rgba(52, 28, 68, 0.75));
+    background: linear-gradient(160deg, rgba(255, 246, 250, 0.96), rgba(255, 240, 247, 0.92));
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border-right: 1px solid rgba(232, 160, 191, 0.15);
-    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.4);
+    border-right: 1px solid rgba(224, 129, 167, 0.25);
+    box-shadow: 10px 0 40px rgba(200, 110, 150, 0.25);
     padding: 90px 20px 20px;
     z-index: 145;
     transform: translateX(-105%);
@@ -351,12 +364,13 @@ body {
     width: 50px; height: 50px;
     border-radius: 50%;
     border: 1px solid var(--pink-dark);
-    background: rgba(10, 10, 15, 0.8);
-    color: var(--pink);
+    background: rgba(255, 252, 249, 0.85);
+    color: var(--pink-dark);
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    box-shadow: 0 6px 18px rgba(224, 129, 167, 0.2);
 }
 
 .music-toggle:hover {
@@ -383,7 +397,7 @@ body {
     justify-content: center;
     text-align: center;
     position: relative;
-    background: radial-gradient(ellipse at center, #1a1028 0%, var(--bg-dark) 70%);
+    background: radial-gradient(ellipse at center, rgba(255, 225, 233, 0.75) 0%, rgba(255, 245, 240, 0) 65%);
     z-index: 3;
 }
 
@@ -412,8 +426,8 @@ body {
 
 .hero-sub {
     font-size: clamp(1rem, 3.5vw, 1.3rem);
-    color: var(--text-dim);
-    font-weight: 300;
+    color: #9a7487;
+    font-weight: 400;
     min-height: 30px;
 }
 
@@ -589,9 +603,9 @@ body {
 .slide-btn {
     position: absolute;
     top: 50%; transform: translateY(-50%);
-    background: rgba(10, 10, 15, 0.6);
-    border: 1px solid rgba(232, 160, 191, 0.3);
-    color: var(--pink);
+    background: rgba(255, 252, 249, 0.8);
+    border: 1px solid rgba(224, 129, 167, 0.3);
+    color: var(--pink-dark);
     font-size: 1.2rem;
     width: 44px; height: 44px;
     border-radius: 50%;
@@ -938,8 +952,8 @@ body {
 
 .message-form input,
 .message-form textarea {
-    background: rgba(123, 94, 167, 0.08);
-    border: 1px solid rgba(232, 160, 191, 0.15);
+    background: rgba(245, 183, 206, 0.14);
+    border: 1px solid rgba(224, 129, 167, 0.2);
     border-radius: 12px;
     padding: 14px 20px;
     color: var(--text);
@@ -995,11 +1009,13 @@ body {
 .spidey-section {
     padding: 100px 20px;
     text-align: center;
-    background: var(--bg-dark);
+    background: linear-gradient(180deg, #1a102a, #0d0814 55%, #10091a);
     position: relative;
     z-index: 3;
     overflow: hidden;
 }
+.spidey-section .section-title { color: #f6c7d8; }
+.spidey-section .section-subtitle { color: #c8b6dd; }
 
 .hud-container {
     position: relative;
@@ -1450,7 +1466,7 @@ html, body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background: radial-gradient(circle at 50% 40%, #151020, #0a0a0f 70%);
+    background: radial-gradient(circle at 50% 40%, #fff1f0, #f9dfe8 55%, #f7eef5 100%);
     transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 .preloader.hidden {
@@ -1508,14 +1524,15 @@ html, body {
     height: 46px;
     border-radius: 50%;
     border: 1px solid var(--pink-dark);
-    background: rgba(20, 15, 30, 0.85);
-    color: var(--pink);
+    background: rgba(255, 252, 249, 0.85);
+    color: var(--pink-dark);
     font-size: 1.1rem;
     cursor: pointer;
     opacity: 0;
     transform: translateY(20px);
     pointer-events: none;
     transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(224, 129, 167, 0.2);
 }
 .back-to-top.show {
     opacity: 1;
@@ -1534,11 +1551,11 @@ html, body {
 }
 .navbar a { font-size: 0.78rem; letter-spacing: 1.5px; }
 .navbar.scrolled {
-    background: rgba(10, 10, 15, 0.88);
+    background: rgba(255, 249, 244, 0.9);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
-    border-bottom: 1px solid rgba(232, 160, 191, 0.1);
+    box-shadow: 0 6px 24px rgba(232, 143, 181, 0.15);
+    border-bottom: 1px solid rgba(224, 129, 167, 0.12);
     padding-top: 13px;
     padding-bottom: 13px;
 }
@@ -1859,3 +1876,38 @@ html, body {
     .ask-yes, .ask-no { width: 100%; }
     .timeline-card h3 { font-size: 1.35rem; }
 }
+
+/* =====================================================================
+   FLORAL PASTEL THEME – decorative accents, light-override fudge patches
+   ===================================================================== */
+
+/* Subtle spider / HUD fade (keeping them as easter-eggs on light theme) */
+.hud-overlay { opacity: 0.18; }
+.spider { opacity: 0.55; }
+.web-overlay { opacity: 0.10; }
+
+/* Fixed floral corner accents */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 18px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23f08fb5' d='M20 2C10 2 4 10 4 20s6 18 16 18 16-8 16-18S30 2 20 2zm0 6a8 8 0 0 1 5 2l-5 6-5-6a8 8 0 0 1 5-2zm-8 12l6 4-6 4a8 8 0 0 1 0-8zm16 0a8 8 0 0 1 0 8l-6-4 6-4z' opacity='0.20'/%3E%3C/svg%3E") center / contain no-repeat;
+    pointer-events: none;
+    z-index: 260;
+    opacity: 0.65;
+    animation: float-gentle 8s ease-in-out infinite alternate;
+}
+@keyframes float-gentle {
+    from { transform: translate(0,0) rotate(0deg); }
+    to   { transform: translate(5px,-4px) rotate(12deg); }
+}
+
+/* Click-hearts icon mix to include petals */
+.init-click-hearts .floating-heart { font-size: 14px; }
+
+/* CTA hover accent stays crisp */
+.cta-btn { border-color: var(--pink-dark); color: var(--pink-dark); }
+.cta-btn:hover { background: rgba(224, 129, 167, 0.10); }

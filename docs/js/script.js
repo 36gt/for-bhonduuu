@@ -23,16 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initAskQuestion();
 });
 
-/* --- Rain --- */
+/* --- Rain (now falling petals) --- */
 function createRain() {
     const overlay = document.querySelector('.rain-overlay');
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 35; i++) {
         const drop = document.createElement('div');
         drop.className = 'rain-drop';
         drop.style.left = Math.random() * 100 + '%';
-        drop.style.height = Math.random() * 80 + 40 + 'px';
-        drop.style.animationDuration = Math.random() * 1 + 0.5 + 's';
-        drop.style.animationDelay = Math.random() * 2 + 's';
+        drop.style.height = Math.random() * 10 + 7 + 'px';
+        drop.style.width = Math.random() * 8 + 6 + 'px';
+        drop.style.animationDuration = Math.random() * 5 + 6 + 's';
+        drop.style.animationDelay = Math.random() * 12 + 's';
         overlay.appendChild(drop);
     }
 }
@@ -98,7 +99,7 @@ function initStars() {
             if (s.a > 1 || s.a < 0.2) s.da = -s.da;
             ctx.beginPath();
             ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(212, 197, 226, ${s.a})`;
+            ctx.fillStyle = `rgba(190, 150, 175, ${s.a})`;
             ctx.fill();
         });
 
@@ -111,8 +112,8 @@ function initStars() {
             if (f.y < 0 || f.y > h) f.vy = -f.vy;
 
             const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 4);
-            grad.addColorStop(0, `rgba(232, 160, 191, ${f.a})`);
-            grad.addColorStop(1, 'rgba(232, 160, 191, 0)');
+            grad.addColorStop(0, `rgba(210, 130, 170, ${f.a})`);
+            grad.addColorStop(1, 'rgba(210, 130, 170, 0)');
             ctx.beginPath();
             ctx.arc(f.x, f.y, f.r * 4, 0, Math.PI * 2);
             ctx.fillStyle = grad;
@@ -446,7 +447,7 @@ function createHeartBurst() {
 /* --- Cursor heart trail --- */
 function initCursorTrail() {
     const container = document.getElementById('heartsContainer');
-    const symbols = ['♥', '♡', '✧', '·', '✦'];
+    const symbols = ['♥', '♡', '🌸', '🌷', '💖', '🌺', '✨'];
     let lastX, lastY, lastTime = 0;
 
     document.addEventListener('mousemove', (e) => {
@@ -486,10 +487,12 @@ function initClickHearts() {
         const isButton = e.target.closest('.gift-lid, button, .send-btn, a');
         if (isButton) return;
 
+        const petalSymbols = ['♥', '🌸', '🌷', '💖', '🌺', '💕', '♡'];
+
         for (let i = 0; i < 5; i++) {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
-            heart.textContent = '♥';
+            heart.textContent = petalSymbols[Math.floor(Math.random() * petalSymbols.length)];
             heart.style.position = 'fixed';
             heart.style.left = e.clientX + 'px';
             heart.style.top = e.clientY + 'px';
