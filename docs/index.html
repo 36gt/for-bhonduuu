@@ -12,8 +12,8 @@
     <meta property="og:image" content="https://36gt.github.io/for-bhonduuu/photos/bhondu.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e8a0bf' d='M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.7-8 11-8 11z'/%3E%3C/svg%3E">
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=10">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="preloader" id="preloader">
@@ -99,7 +99,7 @@
 
     <button class="music-toggle" id="musicToggle" title="Toggle Music">♪</button>
     <audio id="bgMusic" loop>
-        <source src="{{ url_for('static', filename='music/sad-romance.mp3') }}" type="audio/mpeg">
+        <source src="music/sad-romance.mp3" type="audio/mpeg">
     </audio>
 
     <section id="home" class="hero">
@@ -136,15 +136,15 @@
         <div class="slideshow-container">
             <div class="slideshow" id="slideshow">
                 <div class="slide active">
-                    <img src="{{ url_for('static', filename='photos/bhondu.jpg') }}" alt="Memory 1">
+                    <img src="photos/bhondu.jpg" alt="Memory 1">
                     <div class="slide-caption">Memory 1 - edit this text!</div>
                 </div>
                 <div class="slide">
-                    <img src="{{ url_for('static', filename='photos/image.png') }}" alt="Memory 2">
+                    <img src="photos/image.png" alt="Memory 2">
                     <div class="slide-caption">Memory 2 - edit this text!</div>
                 </div>
                 <div class="slide">
-                    <img src="{{ url_for('static', filename='photos/photo1.png') }}" alt="Memory 3">
+                    <img src="photos/photo1.png" alt="Memory 3">
                     <div class="slide-caption">Memory 3 - edit this text!</div>
                 </div>
             </div>
@@ -349,14 +349,14 @@
                 <div class="video-grid">
                     <div class="video-card">
                         <video controls preload="metadata">
-                            <source src="{{ url_for('static', filename='videos/video1.mp4') }}" type="video/mp4">
+                            <source src="videos/video1.mp4" type="video/mp4">
                             Your browser does not support video.
                         </video>
                         <p class="video-label">Our moment 1</p>
                     </div>
                     <div class="video-card">
                         <video controls preload="metadata">
-                            <source src="{{ url_for('static', filename='videos/video2.mp4') }}" type="video/mp4">
+                            <source src="videos/video2.mp4" type="video/mp4">
                             Your browser does not support video.
                         </video>
                         <p class="video-label">Our moment 2</p>
@@ -445,6 +445,6 @@
 
     <button class="back-to-top" id="backToTop" title="Back to top">↑</button>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}?v=6"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
