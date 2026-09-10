@@ -1915,3 +1915,232 @@ body::after {
 /* CTA hover accent stays crisp */
 .cta-btn { border-color: var(--pink-dark); color: var(--pink-dark); }
 .cta-btn:hover { background: rgba(224, 129, 167, 0.10); }
+
+/* =====================================================================
+   PEAK EDITION – custom cursor, 3D tilt, gradient borders, noise grain,
+   text reveal, parallax mouse, scroll hue, magnetic buttons
+   ===================================================================== */
+
+/* --- Smooth scroll snap (gentle) --- */
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+section { scroll-snap-align: start; }
+
+/* --- Custom cursor glow orb --- */
+@media (pointer: fine) {
+    * { cursor: none !important; }
+    body { cursor: none !important; }
+}
+.cursor-glow {
+    position: fixed;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(240, 143, 181, 0.95), rgba(240, 143, 181, 0) 70%);
+    box-shadow: 0 0 18px rgba(240, 143, 181, 0.5), 0 0 40px rgba(240, 143, 181, 0.2);
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    mix-blend-mode: normal;
+}
+.cursor-glow.hovering {
+    width: 50px; height: 50px;
+    background: radial-gradient(circle, rgba(240, 143, 181, 0.25), rgba(240, 143, 181, 0) 70%);
+    box-shadow: 0 0 30px rgba(240, 143, 181, 0.35);
+}
+.cursor-glow.clicking {
+    width: 8px; height: 8px;
+    background: radial-gradient(circle, #fff, rgba(240, 143, 181, 0.6) 70%);
+}
+
+/* --- Noise / grain texture overlay --- */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 265;
+    pointer-events: none;
+    opacity: 0.028;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+}
+
+/* --- Animated gradient border mixin --- */
+.gradient-border {
+    position: relative;
+    overflow: visible;
+}
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--border-angle, 0deg),
+        transparent 20%,
+        var(--pink) 35%,
+        var(--purple) 50%,
+        var(--pink-light) 65%,
+        transparent 80%
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.gradient-border:hover::before {
+    opacity: 1;
+    animation: rotate-border 3s linear infinite;
+}
+@property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+@keyframes rotate-border {
+    to { --border-angle: 360deg; }
+}
+/* Fallback for browsers that don't support @property */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+    .gradient-border::before { display: none; }
+}
+
+/* --- 3D tilt card --- */
+.tilt-card {
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.tilt-card:hover {
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Magnetic button base --- */
+.magnetic-btn {
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+}
+
+/* --- Text character reveal --- */
+.char-reveal .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px) rotateX(-40deg);
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: var(--char-delay);
+}
+.char-reveal.revealed .char {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+}
+
+/* --- Parallax mouse shift --- */
+.parallax-mouse {
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+/* --- Section scroll hue shift (applied via JS custom property) --- */
+section {
+    transition: background-color 0.6s ease;
+}
+
+/* --- Enhanced reason cards with glass depth --- */
+.reason-card {
+    backdrop-filter: blur(12px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 240, 247, 0.35));
+    border: 1px solid rgba(224, 129, 167, 0.18);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.reason-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 22px 50px rgba(224, 129, 167, 0.18);
+    border-color: rgba(224, 129, 167, 0.45);
+}
+
+/* --- Timeline cards glass + hover depth --- */
+.timeline-card {
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 240, 247, 0.30));
+}
+
+/* --- Ask card glass --- */
+.ask-card {
+    backdrop-filter: blur(14px);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.50), rgba(255, 240, 247, 0.30));
+    border: 1px solid rgba(224, 129, 167, 0.22);
+}
+
+/* --- Counter box glass --- */
+.counter-box {
+    backdrop-filter: blur(10px);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.50), rgba(255, 240, 247, 0.30));
+}
+
+/* --- Video card glass --- */
+.video-card {
+    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 240, 247, 0.25));
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.video-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Gift lid shimmer --- */
+.gift-lid {
+    position: relative;
+    overflow: hidden;
+}
+.gift-lid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.35) 55%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+.gift-lid:hover::after {
+    transform: translateX(100%);
+}
+
+/* --- Scroll progress milestone dots --- */
+.scroll-progress::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 50%;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.scroll-progress[style*="9"]::after,
+.scroll-progress[style*="10"]::after { opacity: 1; }
+
+/* --- Spidey section keeps dark glass elements --- */
+.spidey-section .hud-container {
+    backdrop-filter: blur(8px);
+}
+
+/* --- Mobile: disable custom cursor on touch --- */
+@media (pointer: coarse) {
+    .cursor-glow { display: none !important; }
+    * { cursor: auto !important; }
+}
+@media (max-width: 768px) {
+    .cursor-glow { display: none !important; }
+    * { cursor: auto !important; }
+}
+
+/* --- Reduced motion: disable animations --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .cursor-glow { display: none !important; }
+    * { cursor: auto !important; }
+}
