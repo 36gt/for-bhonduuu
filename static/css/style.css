@@ -812,6 +812,14 @@ body {
     position: relative;
     z-index: 2;
 }
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.song-grid .song-embed { max-width: none; }
 
 .song-embed iframe {
     width: 100%;
@@ -1257,6 +1265,7 @@ body {
     .prev { left: 10px; }
     .next { right: 10px; }
     .video-grid { grid-template-columns: 1fr; }
+    .song-grid { grid-template-columns: 1fr; }
     .letter-line { font-size: 1.55rem; line-height: 1.9; }
     .letter-line.signature-line { font-size: 1.6rem; }
     .sorry-letter p { font-size: 1.45rem; line-height: 1.9; }
