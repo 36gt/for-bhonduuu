@@ -1576,7 +1576,6 @@ html, body {
     background: var(--bg-section);
     position: relative;
     z-index: 3;
-    overflow: hidden;
 }
 .timeline {
     position: relative;
@@ -1854,13 +1853,16 @@ html, body {
 /* --- Responsive for new sections --- */
 @media (max-width: 768px) {
     .timeline::before { left: 18px; }
-    .timeline-item, .timeline-item:nth-child(even) {
+    .timeline-item,
+    .timeline-item:nth-child(even) {
         width: 100%;
         margin-left: 0;
         padding: 0 0 40px 56px;
     }
-    .timeline-marker, .timeline-item:nth-child(even) .timeline-marker {
+    .timeline-marker,
+    .timeline-item:nth-child(even) .timeline-marker {
         left: 18px;
+        transform: translateX(-50%);
         width: 40px;
         height: 40px;
         font-size: 1.05rem;
@@ -1875,6 +1877,8 @@ html, body {
     .ask-buttons { flex-direction: column; }
     .ask-yes, .ask-no { width: 100%; }
     .timeline-card h3 { font-size: 1.35rem; }
+    .journey-section { padding-left: 24px; padding-right: 24px; }
+    .timeline-item, .timeline-item:nth-child(even) { padding-left: 52px; }
 }
 
 /* =====================================================================
