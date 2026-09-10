@@ -759,6 +759,12 @@ function initPeakEdition() {
     initScrollHueShift();
     upgradeStarsToParticles();
     initCharacters();
+    initFAB();
+    initEmojiBar();
+    initBokeh();
+    initThinkingPopup();
+    initMobileNav();
+    initLoveList();
 }
 
 /* --- Custom cursor glow orb --- */
@@ -1080,5 +1086,143 @@ function initHeartKittyPet() {
                 }, idx * 100);
             })(i);
         }
+    });
+}
+
+/* =====================================================================
+   NEW WIDGETS – FAB, emoji bar, bokeh, thinking popup, mobile nav, love list
+   ===================================================================== */
+
+/* --- FAB menu toggle --- */
+function initFAB() {
+    const main = document.getElementById('fabMain');
+    const menu = document.getElementById('fabMenu');
+    if (!main || !menu) return;
+    main.addEventListener('click', () => {
+        main.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('.fab-item').forEach(item => {
+        item.addEventListener('click', () => {
+            main.classList.remove('open');
+            menu.classList.remove('open');
+        });
+    });
+}
+
+/* --- Emoji reaction bar --- */
+function initEmojiBar() {
+    const bar = document.getElementById('emojiBar');
+    if (!bar) return;
+    bar.querySelectorAll('.emoji-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const emoji = btn.getAttribute('data-emoji');
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('span');
+                    el.textContent = emoji;
+                    el.style.cssText = 'position:fixed;left:' + (btn.getBoundingClientRect().left + Math.random() * 20 - 10) + 'px;top:' + (btn.getBoundingClientRect().top) + 'px;font-size:' + (16 + Math.random() * 16) + 'px;pointer-events:none;z-index:9999;animation:clickHeartFloat 1.4s ease-out forwards;';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 1400);
+                }, i * 80);
+            }
+        });
+    });
+}
+
+/* --- Bokeh floating bubbles --- */
+function initBokeh() {
+    const overlay = document.getElementById('bokehOverlay');
+    if (!overlay) return;
+    const count = window.innerWidth < 768 ? 8 : 15;
+    for (let i = 0; i < count; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bokeh-bubble';
+        const size = 30 + Math.random() * 80;
+        bubble.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (Math.random() * 100) + '%;animation-duration:' + (12 + Math.random() * 18) + 's;animation-delay:' + (Math.random() * 15) + 's;';
+        overlay.appendChild(bubble);
+    }
+}
+
+/* --- Thinking of You popup --- */
+function initThinkingPopup() {
+    const popup = document.getElementById('thinkingPopup');
+    const text = document.getElementById('tpText');
+    const close = document.getElementById('tpClose');
+    if (!popup || !text || !close) return;
+
+    const msgs = [
+        "I'm thinking of you right now...",
+        "You crossed my mind again...",
+        "Just wanted you to know... I still care.",
+        "Every song reminds me of you.",
+        "I hope you're doing okay, Bhonduuu.",
+        "My heart still skips for you.",
+        "I wish I could hold your hand right now.",
+        "You're the reason I smile... and the reason I cry.",
+        "I still dream about us.",
+        "Come back... please?",
+        "I miss your voice so much.",
+        "You're always on my mind."
+    ];
+
+    function show() {
+        text.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 6000);
+    }
+
+    close.addEventListener('click', () => popup.classList.remove('show'));
+    setTimeout(show, 12000);
+    setInterval(show, 45000);
+}
+
+/* --- Mobile nav scrollspy + smooth scroll --- */
+function initMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    if (!nav) return;
+    const items = nav.querySelectorAll('.mn-item');
+    const sectionIds = Array.from(items).map(a => a.getAttribute('href').replace('#', ''));
+
+    items.forEach(item => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            const target = document.querySelector(item.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    function updateNav() {
+        let current = sectionIds[0];
+        for (const id of sectionIds) {
+            const sec = document.getElementById(id);
+            if (sec && sec.getBoundingClientRect().top <= 120) current = id;
+        }
+        items.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+}
+
+/* --- Love list interactive checkboxes --- */
+function initLoveList() {
+    const items = document.querySelectorAll('.lovelist-item input:not([disabled])');
+    items.forEach(input => {
+        input.addEventListener('change', () => {
+            const item = input.closest('.lovelist-item');
+            if (input.checked) {
+                for (let i = 0; i < 4; i++) {
+                    setTimeout(() => {
+                        const h = document.createElement('span');
+                        h.textContent = '\u{1F496}';
+                        h.style.cssText = 'position:absolute;font-size:' + (12 + Math.random() * 8) + 'px;left:' + (Math.random() * 80 + 10) + '%;top:0;pointer-events:none;animation:clickHeartFloat 1s ease-out forwards;z-index:999;';
+                        item.style.position = 'relative';
+                        item.appendChild(h);
+                        setTimeout(() => h.remove(), 1000);
+                    }, i * 60);
+                }
+            }
+        });
     });
 }

@@ -130,6 +130,23 @@
         </div>
     </section>
 
+    <section id="profile" class="profile-section">
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <span class="profile-initial profile-initial-him">B</span>
+                <span class="profile-heart">♥</span>
+                <span class="profile-initial profile-initial-her">V</span>
+            </div>
+            <h3 class="profile-names">Bhonduuu & Vexxo</h3>
+            <p class="profile-status">complicated ♥</p>
+            <div class="profile-stats">
+                <div class="profile-stat"><span class="ps-val">1000+</span><span class="ps-label">memories</span></div>
+                <div class="profile-stat"><span class="ps-val">∞</span><span class="ps-label">love</span></div>
+                <div class="profile-stat"><span class="ps-val">1</span><span class="ps-label">us forever</span></div>
+            </div>
+        </div>
+    </section>
+
     <section id="memories" class="memories">
         <h2 class="section-title">Our Memories</h2>
         <p class="section-subtitle">Every moment with you was a gift I didn't deserve</p>
@@ -383,6 +400,22 @@
         </div>
     </section>
 
+    <section id="lovelist" class="lovelist-section">
+        <h2 class="section-title">Things I Want To Do With You</h2>
+        <p class="section-subtitle">When you come back, we'll do all of these... together</p>
+        <div class="lovelist-grid">
+            <label class="lovelist-item"><input type="checkbox" checked disabled><span class="ll-check">♥</span><span class="ll-text">Hold your hand at midnight</span></label>
+            <label class="lovelist-item"><input type="checkbox" checked disabled><span class="ll-check">♥</span><span class="ll-text">Watch the sunrise together</span></label>
+            <label class="lovelist-item"><input type="checkbox" disabled><span class="ll-check">♥</span><span class="ll-text">Dance in the rain with you</span></label>
+            <label class="lovelist-item"><input type="checkbox" disabled><span class="ll-check">♥</span><span class="ll-text">Cook your favourite meal</span></label>
+            <label class="lovelist-item"><input type="checkbox" disabled><span class="ll-check">♥</span><span class="ll-text">Travel somewhere new together</span></label>
+            <label class="lovelist-item"><input type="checkbox" disabled><span class="ll-check">♥</span><span class="ll-text">Make you laugh till your stomach hurts</span></label>
+            <label class="lovelist-item"><input type="checkbox" disabled><span class="ll-check">♥</span><span class="ll-text">Write love notes and hide them for you</span></label>
+            <label class="lovelist-item"><input type="checkbox" disabled><span class="ll-check">♥</span><span class="ll-text">Grow old with you</span></label>
+        </div>
+        <p class="lovelist-caption">check these off with me, one by one ♥</p>
+    </section>
+
     <section id="message" class="message-section">
         <h2 class="section-title">Leave Me a Message</h2>
         <p class="section-subtitle">If you ever want to talk, I'm right here</p>
@@ -445,6 +478,43 @@
 
     <button class="back-to-top" id="backToTop" title="Back to top">↑</button>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}?v=6"></script>
+    <div class="bokeh-overlay" id="bokehOverlay"></div>
+
+    <div class="emoji-bar" id="emojiBar">
+        <button class="emoji-btn" data-emoji="💖">💖</button>
+        <button class="emoji-btn" data-emoji="🥺">🥺</button>
+        <button class="emoji-btn" data-emoji="🌸">🌸</button>
+        <button class="emoji-btn" data-emoji="✨">✨</button>
+        <button class="emoji-btn" data-emoji="🦋">🦋</button>
+        <button class="emoji-btn" data-emoji="💗">💗</button>
+    </div>
+
+    <div class="fab-container" id="fabContainer">
+        <div class="fab-menu" id="fabMenu">
+            <a href="#home" class="fab-item" title="Home"><span>🏠</span></a>
+            <a href="#oursong" class="fab-item" title="Song"><span>🎵</span></a>
+            <a href="#gifts" class="fab-item" title="Gifts"><span>🎁</span></a>
+            <a href="#message" class="fab-item" title="Message"><span>💌</span></a>
+        </div>
+        <button class="fab-main" id="fabMain"><span>♥</span></button>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#home" class="mn-item active"><span class="mn-icon">🏠</span><span class="mn-label">Home</span></a>
+        <a href="#memories" class="mn-item"><span class="mn-icon">📸</span><span class="mn-label">Us</span></a>
+        <a href="#oursong" class="mn-item"><span class="mn-icon">🎵</span><span class="mn-label">Song</span></a>
+        <a href="#gifts" class="mn-item"><span class="mn-icon">🎁</span><span class="mn-label">Gifts</span></a>
+        <a href="#message" class="mn-item"><span class="mn-icon">💌</span><span class="mn-label">Msg</span></a>
+    </div>
+
+    <div class="thinking-popup" id="thinkingPopup">
+        <div class="tp-content">
+            <div class="tp-emoji">💭</div>
+            <p class="tp-text" id="tpText">I'm thinking of you right now...</p>
+            <button class="tp-close" id="tpClose">×</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=7"></script>
 </body>
 </html>
