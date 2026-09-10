@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bhonduuu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="starsCanvas"></canvas>
+    <div class="rain-overlay"></div>
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <div class="web-overlay" id="webOverlay"></div>
+    <div class="spider" id="crawlingSpider">
+        <div class="spider-body"></div>
+        <div class="spider-leg leg-1"></div>
+        <div class="spider-leg leg-2"></div>
+        <div class="spider-leg leg-3"></div>
+        <div class="spider-leg leg-4"></div>
+        <div class="spider-leg leg-5"></div>
+        <div class="spider-leg leg-6"></div>
+        <div class="spider-leg leg-7"></div>
+        <div class="spider-leg leg-8"></div>
+    </div>
+    <div class="hud-overlay">
+        <div class="hud-corner tl"></div>
+        <div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div>
+        <div class="hud-corner br"></div>
+        <div class="hud-scanline"></div>
+        <div class="hud-grid"></div>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <button class="side-menu-btn" id="sideMenuBtn" title="Menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+    </button>
+
+    <aside class="side-menu" id="sideMenu">
+        <div class="side-menu-header">
+            <span class="side-menu-title">For Bhonduuu 💕</span>
+            <button class="side-menu-close" id="sideMenuClose">✕</button>
+        </div>
+        <nav class="side-menu-links">
+            <a href="#home" class="side-link" style="--idx:0"><span class="link-icon">🏠</span> Home</a>
+            <a href="#memories" class="side-link" style="--idx:1"><span class="link-icon">📸</span> Memories</a>
+            <a href="#reasons" class="side-link" style="--idx:2"><span class="link-icon">💌</span> Why You</a>
+            <a href="#sorry" class="side-link" style="--idx:3"><span class="link-icon">🥺</span> Sorry</a>
+            <a href="#letter" class="side-link" style="--idx:4"><span class="link-icon">💌</span> Letter</a>
+            <a href="#gifts" class="side-link" style="--idx:5"><span class="link-icon">🎁</span> Treasures</a>
+            <a href="#message" class="side-link" style="--idx:6"><span class="link-icon">💬</span> Message</a>
+            <a href="#spiderman" class="side-link" style="--idx:7"><span class="link-icon">🕷️</span> Spidey</a>
+        </nav>
+        <div class="side-menu-footer">
+            <span>Made with a broken heart 💔</span>
+        </div>
+    </aside>
+
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#memories">Memories</a>
+        <a href="#reasons">Why You</a>
+        <a href="#sorry">Sorry</a>
+        <a href="#letter">Letter</a>
+        <a href="#gifts">Treasures</a>
+        <a href="#spiderman">Spidey</a>
+        <a href="#message">Message</a>
+    </nav>
+
+    <button class="music-toggle" id="musicToggle" title="Toggle Music">♪</button>
+    <audio id="bgMusic" loop>
+        <source src="music/sad-romance.mp3" type="audio/mpeg">
+    </audio>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="typewriter" id="heroTitle"></h1>
+            <p class="fade-in delay-1 hero-sub" id="heroSub"></p>
+            <a href="#memories" class="cta-btn fade-in delay-3">Scroll Down</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="memories" class="memories">
+        <h2 class="section-title">Our Memories</h2>
+        <p class="section-subtitle">Every moment with you was a gift I didn't deserve</p>
+        <div class="slideshow-container">
+            <div class="slideshow" id="slideshow">
+                <div class="slide active">
+                    <img src="photos/bhondu.jpg" alt="Memory 1">
+                    <div class="slide-caption">Memory 1 - edit this text!</div>
+                </div>
+                <div class="slide">
+                    <img src="photos/image.png" alt="Memory 2">
+                    <div class="slide-caption">Memory 2 - edit this text!</div>
+                </div>
+                <div class="slide">
+                    <img src="photos/photo1.png" alt="Memory 3">
+                    <div class="slide-caption">Memory 3 - edit this text!</div>
+                </div>
+            </div>
+            <button class="slide-btn prev" id="prevBtn">❮</button>
+            <button class="slide-btn next" id="nextBtn">❯</button>
+            <div class="slide-dots" id="slideDots"></div>
+        </div>
+    </section>
+
+    <section id="reasons" class="reasons-section">
+        <h2 class="section-title">Why I Love You</h2>
+        <p class="section-subtitle">A million reasons, but here are a few</p>
+        <div class="reasons-grid">
+            <div class="reason-card" style="--i:0">
+                <div class="reason-icon">🌸</div>
+                <p>Your smile lights up my darkest days</p>
+            </div>
+            <div class="reason-card" style="--i:1">
+                <div class="reason-icon">🌙</div>
+                <p>You make ordinary moments feel magical</p>
+            </div>
+            <div class="reason-card" style="--i:2">
+                <div class="reason-icon">💫</div>
+                <p>Your laugh is my favorite sound in the world</p>
+            </div>
+            <div class="reason-card" style="--i:3">
+                <div class="reason-icon">🦋</div>
+                <p>You loved me even when I didn't love myself</p>
+            </div>
+            <div class="reason-card" style="--i:4">
+                <div class="reason-icon">🌷</div>
+                <p>You made me want to be a better person</p>
+            </div>
+            <div class="reason-card" style="--i:5">
+                <div class="reason-icon">✨</div>
+                <p>Every heartbeat of mine spells your name</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sorry" class="sorry-section">
+        <div class="sorry-content">
+            <h2 class="section-title">I'm Sorry</h2>
+            <div class="sorry-letter">
+                <p>Dear Bhonduuu,</p>
+                <p>Someone whispered poison in my ears, and I was weak enough to believe her over you. She told me stories, made me doubt everything we had, and pushed me to let you go. I broke up with you without ever explaining - and I'm ashamed that I let her steal my voice too.</p>
+                <p>You never asked me why I was going. Maybe you didn't care enough to ask. Or maybe your heart was already too tired to fight for someone who wouldn't stand up for you. Either way, I let you slip away, and that guilt will stay with me forever.</p>
+                <p>And now she's gone too. She cheated on me, and she left just like she entered - quietly, like she never mattered. And you know what hurts most? Losing her doesn't hurt. Not even a little. It's you I lost. It was always you.</p>
+                <p>I know you probably won't come back. I've told myself a thousand times not to hope. But I had to write this down, because I never got to say it to your face. I was a fool chosen by lies, and I threw away the only truth I ever had.</p>
+                <p>You deserved better. You always did. And I'm sorry, from the deepest, saddest part of me.</p>
+                <p class="signature">Forever yours,<br>Your foolish boy</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="letter" class="letter-section">
+        <h2 class="section-title">A Letter For You</h2>
+        <p class="section-subtitle">Read this slowly, it's from my heart</p>
+        <div class="letter-paper">
+            <p class="letter-line" style="--delay:0">My dearest Bhonduuu,</p>
+            <p class="letter-line" style="--delay:1">I know you'll probably never read this.</p>
+            <p class="letter-line" style="--delay:2">But I wrote it anyway, the way I write everything now - for you.</p>
+            <p class="letter-line" style="--delay:3">Someone I should have never trusted</p>
+            <p class="letter-line" style="--delay:4">took my hand away from yours.</p>
+            <p class="letter-line" style="--delay:5">I didn't fight for you. I didn't even ask why.</p>
+            <p class="letter-line" style="--delay:6">I just... walked away. Like you were nothing.</p>
+            <p class="letter-line" style="--delay:7">But you were everything. You always were.</p>
+            <p class="letter-line" style="--delay:8">The one who lied to me broke me too,</p>
+            <p class="letter-line" style="--delay:9">and now I'm here holding only the memory of you.</p>
+            <p class="letter-line" style="--delay:10">If wishes were bridges, I'd crawl back to you on my knees.</p>
+            <p class="letter-line" style="--delay:11">But I know this page will stay unread,</p>
+            <p class="letter-line" style="--delay:12">and my heart will stay broken,</p>
+            <p class="letter-line" style="--delay:13">because I know she will not come - you will not come.</p>
+            <p class="letter-line signature-line" style="--delay:14">Still, one day I hope you know the truth. ♥</p>
+        </div>
+    </section>
+
+    <section id="gifts" class="gifts-section">
+        <h2 class="section-title">What You Gave Me</h2>
+        <p class="section-subtitle">I kept it all safely... every single memory</p>
+        <div class="gifts-box" id="giftsBox">
+            <div class="gift-lid" id="giftLid">
+                <span class="gift-text">Click to open my treasure box</span>
+                <span class="gift-icon">🎁</span>
+            </div>
+            <div class="gift-content" id="giftContent">
+                <p class="gift-message">Everything you gave me... I kept it safe. These videos are proof that we were real, that we were beautiful.</p>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video controls preload="metadata">
+                            <source src="videos/video1.mp4" type="video/mp4">
+                            Your browser does not support video.
+                        </video>
+                        <p class="video-label">Our moment 1</p>
+                    </div>
+                    <div class="video-card">
+                        <video controls preload="metadata">
+                            <source src="videos/video2.mp4" type="video/mp4">
+                            Your browser does not support video.
+                        </video>
+                        <p class="video-label">Our moment 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="message" class="message-section">
+        <h2 class="section-title">Leave Me a Message</h2>
+        <p class="section-subtitle">If you ever want to talk, I'm right here</p>
+        <form class="message-form" id="messageForm">
+            <input type="text" id="nameInput" placeholder="Your Name" required>
+            <textarea id="messageInput" placeholder="Write something..." rows="5" required></textarea>
+            <button type="submit" class="send-btn">Send with Love ♥</button>
+        </form>
+        <div class="form-response" id="formResponse"></div>
+    </section>
+
+    <section id="spiderman" class="spidey-section">
+        <h2 class="section-title">My Hero</h2>
+        <p class="section-subtitle">Spider-Man always gets back up... and so will I, for you</p>
+        <div class="hud-container">
+            <div class="hud-ring"></div>
+            <div class="hud-target">✦</div>
+            <div class="hud-lines"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Made with a broken heart, for the one who broke it</p>
+        <div class="broken-heart">💔</div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
