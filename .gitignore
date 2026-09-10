@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+email_config.json
+messages.txt
+.vscode/
+.idea/
