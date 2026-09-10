@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initPreloader();
+    initScrollProgress();
+    initBackToTop();
+    initNavbarScroll();
+    initScrollspy();
     createRain();
     createFloatingHearts();
     initStars();
@@ -14,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlowOnScroll();
     initSideMenu();
     initSpider();
+    initCounter();
+    initAskQuestion();
 });
 
 /* --- Rain --- */
@@ -206,7 +213,7 @@ function initScrollAnimations() {
         });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.reason-card, .letter-line').forEach(el => {
+    document.querySelectorAll('.reason-card, .letter-line, .timeline-item, .counter-box, .ask-card').forEach(el => {
         observer.observe(el);
     });
 }
@@ -569,5 +576,168 @@ function initSideMenu() {
 
     document.querySelectorAll('.side-link').forEach(link => {
         link.addEventListener('click', () => setTimeout(closeMenu, 300));
+    });
+}
+
+/* ==========================================================================
+   PRO EDITION - preloader, scroll progress, back to top, nav polish,
+   scrollspy, waiting counter, one last question
+   ========================================================================== */
+
+/* --- Preloader --- */
+function initPreloader() {
+    const pre = document.getElementById('preloader');
+    if (!pre) return;
+
+    function hide() {
+        if (!pre.classList.contains('hidden')) pre.classList.add('hidden');
+    }
+    window.addEventListener('load', hide);
+    setTimeout(hide, 3800);
+}
+
+/* --- Scroll progress bar --- */
+function initScrollProgress() {
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+
+    function update() {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop || document.body.scrollTop;
+        const max = h.scrollHeight - h.clientHeight;
+        bar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+}
+
+/* --- Back to top --- */
+function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        btn.classList.toggle('show', scrolled > 450);
+    }, { passive: true });
+}
+
+/* --- Navbar solid state on scroll --- */
+function initNavbarScroll() {
+    const nav = document.getElementById('mainNav');
+    if (!nav) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        nav.classList.toggle('scrolled', scrolled > 40);
+    }, { passive: true });
+}
+
+/* --- Scrollspy: highlight active nav link --- */
+function initScrollspy() {
+    const links = document.querySelectorAll('.nav-link, .side-link');
+    if (!links.length) return;
+
+    const map = {};
+    links.forEach(link => { map[link.getAttribute('href')] = link; });
+
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            links.forEach(link => link.classList.remove('active'));
+            const key = '#' + entry.target.id;
+            if (map[key]) map[key].classList.add('active');
+        });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(section => observer.observe(section));
+}
+
+/* --- Still Waiting live counter ---
+   CHANGE THIS DATE to the day it ended: new Date('2026-09-10T00:00:00') */
+function initCounter() {
+    const el = {
+        days: document.getElementById('countDays'),
+        hours: document.getElementById('countHours'),
+        mins: document.getElementById('countMins'),
+        secs: document.getElementById('countSecs')
+    };
+    if (!el.days) return;
+
+    const WAITING_SINCE = new Date('2026-09-10T00:00:00');
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function tick() {
+        const diff = Math.max(0, new Date() - WAITING_SINCE);
+        const total = Math.floor(diff / 1000);
+        el.days.textContent = Math.floor(total / 86400);
+        el.hours.textContent = pad(Math.floor((total % 86400) / 3600));
+        el.mins.textContent = pad(Math.floor((total % 3600) / 60));
+        el.secs.textContent = pad(total % 60);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+}
+
+/* --- One Last Question trick --- */
+function initAskQuestion() {
+    const card = document.getElementById('askCard');
+    const yesBtn = document.getElementById('askYes');
+    const noBtn = document.getElementById('askNo');
+    const reveal = document.getElementById('askReveal');
+    if (!card || !yesBtn || !noBtn || !reveal) return;
+
+    const msgs = [
+        'No 🥺',
+        'Are you sure? 🥺',
+        'Really, really sure?',
+        'Think about it one more time...',
+        'My poor heart 💔',
+        'The pink button is prettier 💖',
+        "Okay, I'll cry now 😢",
+        'Please? 🥹'
+    ];
+    let dodgeCount = 0;
+
+    function dodge() {
+        dodgeCount = Math.min(dodgeCount + 1, msgs.length - 1);
+        noBtn.textContent = msgs[dodgeCount];
+
+        const cardRect = card.getBoundingClientRect();
+        const btnW = noBtn.offsetWidth;
+        const maxDx = Math.max((cardRect.width - btnW) * 0.7, 60);
+        const maxDy = Math.max(cardRect.height * 0.5, 60);
+        const dx = (Math.random() * 2 - 1) * maxDx;
+        const dy = (Math.random() * 2 - 1) * maxDy;
+        noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+    }
+
+    noBtn.addEventListener('mouseenter', dodge);
+    noBtn.addEventListener('touchstart', dodge);
+    noBtn.addEventListener('click', dodge);
+
+    yesBtn.addEventListener('click', () => {
+        yesBtn.disabled = true;
+        noBtn.style.opacity = '0';
+        noBtn.style.pointerEvents = 'none';
+        yesBtn.style.opacity = '0';
+        document.querySelector('.ask-buttons').classList.add('answered');
+
+        createHeartBurst();
+        for (let i = 1; i <= 4; i++) {
+            setTimeout(createHeartBurst, i * 260);
+        }
+
+        reveal.classList.add('show');
+        setTimeout(() => {
+            reveal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 400);
     });
 }
